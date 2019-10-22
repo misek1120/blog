@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block header %}
+  <title>Delete | memoread</title>
+  <link href="{% static 'css/record_delete.css' %}" rel="stylesheet">
+{% edblock %}
+{% block body %}
+<body id="create_record">
+  <header>
+    <nav>
+      <div class="head-center">
+        <div class="logo">
+          <a href="{% url 'index' %}"><img class="img_logo" src="{% static 'images/logo1.png' %}"></a>
+        </div>
+        <ul class="list_nav">
+          <li><a href="{% url 'logout' %}" class="btn btn-outline-secondary"><i class="fas fa-sign-out-alt"></i>ログアウト</a></li>
+          <li><a href="{% url 'account_info' request.user.username %}" class="btn btn-outline-secondary"><i class="fas fa-cog"></i>設定</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <div id="wrap">
+    <div class="content">
+      <div class="main-center">
+        <h1>削除の確認</h1>
+        <p>本当に削除してもよろしいですか？</p>
+        <form method="POST">
+          {% csrf_token %}
+          {{form}}
+          <button type="submit" class="btn btn-danger">削除</button>
+          <a href="{% url 'index' %}" class="btn btn-default">キャンセル</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock %}

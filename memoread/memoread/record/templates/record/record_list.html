@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block header %}
+  <title>List | memoread</title>
+  <link href="{% static 'css/record_list.css' %}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+<body id="record_list">
+  <header>
+    <nav>
+      <div class="head-center">
+        <div class="logo">
+          <a href="{% url 'index' %}"><img class="img_logo" src="{% static 'images/logo1.png' %}"></a>
+        </div>
+        <ul class="list_nav">
+          <li id=new><a href="{% url 'create' %}"><i class="fas fa-edit"></i>作成</a></li>
+          <li><a href="{% url 'logout' %}" class="btn btn-outline-secondary"><i class="fas fa-sign-out-alt"></i>ログアウト</a></li>
+          <li><a href="{% url 'account_info' request.user.username %}" class="btn btn-outline-secondary"><i class="fas fa-cog"></i>設定</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <div id="wrap">
+
+    <div class="content">
+      <div class="main-center">
+        <div class="search_form">
+          <form method="get" action="{% url 'index' %}">{% csrf_token %}
+            <input type="text" name="search" placeholder="キーワード検索"/>
+            <button class="btn btn-primary" type="submit"><i class="fas fa-search" style="color:white"></i></button>
+          </form>
+        </div>
+        <h2>記録一覧</h2>
+        <!--<p id="new"><a href="{% url 'create' %}"><i class="fas fa-edit"></i>作成</a></p>-->
+
+
+        <div class="wrapper">
+          {% for record in records %}
+            <div class="record">
+              <a href="{% url 'detail' request.user.username record.id %}">
+                {% if record.image %}
+                  <img width="250" height="250" src='{{ MEDIA_ROOT }}{{ record.image.url }}'/><br>
+                {% else %}
+                  <img width="250" height="250" src="{% static 'images/book_default.jpeg' %}"/><br>
+                {% endif %}
+            <!--<h3 class="post-title">-->
+                <!--<img src='{{ MEDIA_URL }}{{ record.image }}'/>-->
+                <div>タイトル: {{ record.title }}</div>
+                <div>著者: {{ record.author }}</div>
+            <!--</h3>-->
+              </a>
+            </div>
+          <!--<p class="post-meta">{{ record.posted_date }}</p>-->
+          {% endfor %}
+        </div>
+      </div>
+      {% include "record/pagination.html" %}
+    </div>
+  </div>
+  <footer><small>(C)2019 Kenta Mise. </small></footer>
+</body>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block header %}
+  <title>Login | memoread</title>
+  <link href="{% static 'css/sign_in.css' %}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+<body id="login">
+  <header>
+    <nav>
+      <div class="head-center">
+        <div class="logo">
+          <a href="{% url 'login' %}"><img class="img_logo" src="{% static 'images/logo1.png' %}"></a>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div id="wrap">
+    <div class="content">
+      <div class="main-center">
+        <section>
+          <div>
+            <label>404 Not Found<br>お探しのページが見つかりませんでした。<br><a class="hover-under" href="{% url 'index' %}">トップページへ戻る</a></label>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock %}

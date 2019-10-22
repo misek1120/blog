@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block header %}
+  <title>Update | memoread</title>
+  <link href="{% static 'css/record_update.css' %}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+<body id="update_record">
+  <header>
+    <nav>
+      <div class="head-center">
+        <div class="logo">
+          <a href="{% url 'index' %}"><img class="img_logo" src="{% static 'images/logo1.png' %}"></a>
+        </div>
+        <ul class="list_nav">
+          <li><a href="{% url 'logout' %}" class="btn btn-outline-secondary"><i class="fas fa-sign-out-alt"></i>ログアウト</a></li>
+          <li><a href="{% url 'account_info' request.user.username %}" class="btn btn-outline-secondary"><i class="fas fa-cog"></i>設定</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <div id="wrap">
+    <div class="content">
+      <div class="main-center">
+        <h1>編集</h1>
+        <form method="POST">
+          {% csrf_token %}
+          <div class="post-preview">
+            <table class="table">
+              <label><b>画像</b></label>
+              <div class="inputs">
+              {{ form.image }}</div>
+              <label><b>タイトル</b></label>
+              <div class="inputs">
+              {{ form.title }}</div>
+              <label><b>著者</b></label><br>
+              <div class="inputs">
+              {{ form.author }}<br>
+              </div>
+              <label><b>ジャンル</b></label><br>
+              <div class="inputs">
+              {{ form.genre }}<br>
+              </div>
+              <label><b>本書の要約をしてください</b></label><br>
+              <div class="inputs">
+              {{ form.summary }}<br>
+              </div>
+              <label><b>感想を記載してください</b></label><br>
+              <div class="inputs">
+              {{ form.impressions }}<br>
+              </div>
+              <label><b>本書から学んだことを記載してください</b></label><br>
+              <div class="inputs">
+              {{ form.learn }}<br>
+              </div>
+              <label><b>本書の話の流れを記載してください</b></label><br>
+              <div class="inputs">
+              {{ form.story }}<br>
+              </div>
+              <label><b>本書が他の本と異なる部分を記載してください</b></label><br>
+              <div class="inputs">
+              {{ form.difference }}<br>
+              </div>
+              <label><b>本書で重要だと思う部分を記載してください</b></label><br>
+              <div class="inputs">
+              {{ form.importance }}<br>
+              </div>
+              <label><b>著者の意見に賛成できる部分を記載してください</b></label><br>
+              <div class="inputs">
+              {{ form.agree }}<br>
+              </div>
+              <label><b>著者の意見に賛成できない部分を記載してください</b></label><br>
+              <div class="inputs">
+              {{ form.opposition }}<br>
+              </div>
+              <label><b>本書で理解できなかった部分を記載してください</b></label><br>
+              <div class="inputs">
+              {{ form.unkown }}<br>
+              </div>
+              <label><b>本書の事例のなかで興味深かった部分とその理由を記載してください</b></label><br>
+              <div class="inputs">
+              {{ form.example }}<br>
+              </div>
+              <label><b>本書で感銘を受けた部分を記載してください</b></label><br>
+              <div class="inputs">
+              {{ form.inspiration }}<br>
+              </div>
+              {{ form.user }}
+              </table>
+            </div>
+          <!--<table class="table">
+            {{ form }}
+          </table>-->
+          <button type="submit">保存</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock %}

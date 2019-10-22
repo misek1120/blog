@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block header %}
+  <title>Account Detail | memoread</title>
+  <link href="{% static 'css/account_details.css' %}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+<body id="account_detail">
+  <header>
+    <nav>
+      <div class="head-center">
+        <div class="logo">
+          <a href="{% url 'index' %}"><img class="img_logo" src="{% static 'images/logo1.png' %}"></a>
+        </div>
+        <ul class="list_nav">
+          <li><a href="{% url 'logout' %}" class="btn btn-outline-secondary"><i class="fas fa-sign-out-alt"></i>ログアウト</a></li>
+          <li><a href="{% url 'account_info' request.user.username %}" class="btn btn-outline-secondary"><i class="fas fa-cog"></i>設定</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <div id="wrap">
+    <div class="content">
+      <div class="main-center">
+        <h2>アカウント詳細</h2>
+        <div class="post-preview">
+          <table class="table">
+            <div class="results">
+              <label><b>ユーザー名</b></label><br>
+              {{ object.username }}
+            </div>
+            <div class="results">
+              <label><b>氏名</b></label><br>
+              {{ object.full_name|default:"" }}<br>
+            </div>
+            <div class="results">
+              <label><b>メールアドレス</b></label><br>
+              {{ object.email|default:"" }}<br>
+            </div>
+          </table>
+        </div>
+        <a href="{% url 'account_update' request.user.username %}" class="btn btn-primary">編集</a>
+      </div>
+    </div>
+  </div>
+  <footer><small>(C)2019 Kenta Mise. </small></footer>
+</body>
+{% endblock %}

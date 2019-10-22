@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block header %}
+  <title>Login | memoread</title>
+  <link href="{% static 'css/sign_in.css' %}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+<body id="login">
+  <header>
+    <nav>
+      <div class="head-center">
+        <div class="logo">
+          <a href="{% url 'login' %}"><img class="img_logo" src="{% static 'images/logo1.png' %}"></a>
+        </div>
+        <ul class="list_nav">
+          <li><a href="{% url 'create_account' %}">会員登録</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <div id="wrap">
+    <div class="content">
+      <div class="main-center">
+        <!--{{ form.errors }}-->
+        <form method="post" action="{% url 'login' %}">
+          {% csrf_token %}
+          <table class="table">
+            <div class="inputs">
+            {{ form.username }}</div>
+            <div class="inputs">
+            {{ form.password }}<br>
+            </div>
+          </table>
+          <input type="hidden" name="text" value="{{ request.GET.next }}"/>
+          <button class="btn btn-primary" type="submit">ログイン</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block header %}
+  <title>Detail | memoread</title>
+  <link href="{% static 'css/record_details.css' %}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+<body id="create_record">
+  <header>
+    <nav>
+      <div class="head-center">
+        <div class="logo">
+          <a href="{% url 'index' %}"><img class="img_logo" src="{% static 'images/logo1.png' %}"></a>
+        </div>
+        <ul class="list_nav">
+          <li id=new><a href="{% url 'create' %}"><i class="fas fa-edit"></i>作成</a></li>
+          <li><a href="{% url 'logout' %}" class="btn btn-outline-secondary"><i class="fas fa-sign-out-alt"></i>ログアウト</a></li>
+          <li><a href="{% url 'account_info' request.user.username %}" class="btn btn-outline-secondary"><i class="fas fa-cog"></i>設定</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <div id="wrap">
+    <div class="content">
+      <div class="main-center">
+        <div class="post-preview">
+          <table class="table">
+            <div class="image">
+              {% if object.image %}
+                <img width="250" height="250" src='{{ MEDIA_ROOT }}{{ object.image.url }}'/><br>
+              {% else %}
+                <img width="250" height="250" src="{% static 'images/book_default.jpeg' %}"/><br>
+              {% endif %}
+            </div>
+            <div class="results">
+            <label><b>タイトル</b></label><br>
+              {{ object.title }}
+            </div>
+            <div class="results">
+              <label><b>著者</b></label><br>
+              {{ object.author|default:"" }}<br>
+            </div>
+            <div class="results">
+              <label><b>本書の要約をしてください</b></label><br>
+              {{ object.summary|default:"" }}<br>
+            </div>
+            <div class="results">
+              <label><b>感想を記載してください</b></label><br>
+              {{ object.impressions|default:"" }}<br>
+            </div>
+            <div class="results">
+              <label><b>本書から学んだことを記載してください</b></label><br>
+              {{ object.learn|default:"" }}<br>
+            </div>
+            <div class="results">
+              <label><b>本書の話の流れを記載してください</b></label><br>
+              {{ object.story|default:"" }}<br>
+            </div>
+            <div class="results">
+              <label><b>本書が他の本と異なる部分を記載してください</b></label><br>
+              {{ object.difference|default:"" }}<br>
+            </div>
+            <div class="results">
+              <label><b>本書で重要だと思う部分を記載してください</b></label><br>
+              {{ object.importance|default:"" }}<br>
+            </div>
+            <div class="results">
+              <label><b>著者の意見に賛成できる部分を記載してください</b></label><br>
+              {{ object.agree|default:"" }}<br>
+            </div>
+            <div class="results">
+              <label><b>著者の意見に賛成できない部分を記載してください</b></label><br>
+              {{ object.opposition|default:"" }}<br>
+            </div>
+            <div class="results">
+              <label><b>本書で理解できなかった部分を記載してください</b></label><br>
+              {{ object.unkown|default:"" }}<br>
+            </div>
+            <div class="results">
+              <label><b>本書の事例のなかで興味深かった部分とその理由を記載してください</b></label><br>
+              {{ object.example|default:"" }}<br>
+            </div>
+            <div class="results">
+              <label><b>本書で感銘を受けた部分を記載してください</b></label><br>
+              {{ object.inspiration|default:"" }}<br>
+            </div>
+            <div class="results">
+              <label><b>最終更新日時</b></label><br>
+              {{ object.posted_date|date:"Y/m/d h:m:s" }}
+            </div>
+          </table>
+        </div>
+        <a href="{% url 'update' object.id %}" class="btn btn-primary">編集</a>
+        <a href="{% url 'delete' object.id %}" class="btn btn-danger">削除</a>
+      </div>
+    </div>
+  </div>
+  <footer><small>(C)2019 Kenta Mise. </small></footer>
+</body>
+{% endblock %}

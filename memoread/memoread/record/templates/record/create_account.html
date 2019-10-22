@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block header %}
+  <title>List | memoread</title>
+  <link href="{% static 'css/create_account.css' %}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+<body id="create_record">
+  <header>
+    <nav>
+      <div class="head-center">
+        <div class="logo">
+          <a href="{% url 'index' %}"><img class="img_logo" src="{% static 'images/logo1.png' %}"></a>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div id="wrap">
+    <div class="content">
+      <div class="main-center">
+        <h2>新規会員登録</h2>
+        <form method="POST">
+          {% csrf_token %}
+          <table class="table">
+            <label>ユーザーID</label>
+            <div class="inputs">
+              {{ form.username }}
+              {% if form.username.errors %}
+                {{ form.username.errors }}
+              {% endif %}
+            </div>
+            <label>パスワード</label><br>
+            <div class="inputs">
+              {{ form.password1 }}<br>
+              {{ form.password1.errors }}
+            </div>
+            <label>パスワード(確認)</label>
+            <div class="inputs">
+              {{ form.password2 }}<br>
+              {{ form.password2.errors }}
+            </div>
+          </table>
+      <button type = "submit">登録</button>
+    </form>
+  </div>
+</div>
+</div>
+  </body>
+{% endblock %}

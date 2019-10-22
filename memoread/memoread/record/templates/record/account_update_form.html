@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block header %}
+  <title>Account Update | memoread</title>
+  <link href="{% static 'css/account_update.css' %}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+<body id="account_detail">
+  <header>
+    <nav>
+      <div class="head-center">
+        <div class="logo">
+          <a href="{% url 'index' %}"><img class="img_logo" src="{% static 'images/logo1.png' %}"></a>
+        </div>
+        <ul class="list_nav">
+          <li><a href="{% url 'logout' %}" class="btn btn-outline-secondary"><i class="fas fa-sign-out-alt"></i>ログアウト</a></li>
+          <li><a href="{% url 'account_info' request.user.username %}" class="btn btn-outline-secondary"><i class="fas fa-cog"></i>設定</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <div id="wrap">
+    <div class="content">
+      <div class="main-center">
+        <div class="post-preview">
+          <h1>アカウント編集</h1>
+          <form method="POST">
+            {% csrf_token %}
+            <table class="table">
+              <label><b>ユーザー名</b></label>
+              <div class="inputs">
+                {{ form.username }}<br>
+              </div>
+              <label><b>氏名</b></label>
+              <div class="inputs">
+                {{ form.full_name }}<br>
+              </div>
+              <label><b>メールアドレス</b></label>
+              <div class="inputs">
+                {{ form.email }}<br>
+              </div>
+              {{ form.uuid }}
+            </table>
+            <button type="submit">保存</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock %}
